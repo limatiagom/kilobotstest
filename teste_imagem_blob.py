@@ -1,31 +1,31 @@
 import numpy as np
 import cv2
 
-im = cv2.imread("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/kilobots_marina/blob.png", 11)
+im = cv2.imread("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/kilobots_marina/kilo1.JPG", 11)
 img = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
 
 params = cv2.SimpleBlobDetector_Params()
      
 # Change thresholds
-params.minThreshold = 10;
-params.maxThreshold = 500;
+# params.minThreshold = 1;
+# params.maxThreshold = 5000;
   
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 100
+params.minArea = 10
    
 # Filter by Circularity
-params.filterByCircularity = True
-params.minCircularity = 0.001
+# params.filterByCircularity = True
+# params.minCircularity = 0.001
     
 # Filter by Convexity
-params.filterByConvexity = True
-params.minConvexity = 0.01
+# params.filterByConvexity = True
+# params.minConvexity = 0.01
     
 # Filter by Inertia
-params.filterByInertia = True
-params.minInertiaRatio = 0.01
+# params.filterByInertia = True
+# params.minInertiaRatio = 0.01
 
 # Set up the detector with default parameters.
 detector = cv2.SimpleBlobDetector_create(params)
