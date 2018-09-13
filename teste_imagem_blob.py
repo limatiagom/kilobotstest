@@ -1,33 +1,31 @@
 import numpy as np
 import cv2
 
-im = cv2.imread("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/Blob1.png", 11)
+im = cv2.imread("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/kilobots_marina/blob.png", 11)
 img = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
 
 params = cv2.SimpleBlobDetector_Params()
      
 # Change thresholds
-# params.minThreshold = 0
-# params.maxThreshold = 1000
+params.minThreshold = 10;
+params.maxThreshold = 500;
   
 # Filter by Area.
-# params.filterByArea = True
-#  params.minArea = 4000
-
-params.blobColor = 255
+params.filterByArea = True
+params.minArea = 100
    
 # Filter by Circularity
-# params.filterByCircularity = True
-# params.minCircularity = 1
+params.filterByCircularity = True
+params.minCircularity = 0.001
     
 # Filter by Convexity
-# params.filterByConvexity = True
-# params.minConvexity = 0.01
+params.filterByConvexity = True
+params.minConvexity = 0.01
     
 # Filter by Inertia
-# params.filterByInertia = True
-# params.minInertiaRatio = 0.01
+params.filterByInertia = True
+params.minInertiaRatio = 0.01
 
 # Set up the detector with default parameters.
 detector = cv2.SimpleBlobDetector_create(params)
@@ -64,8 +62,6 @@ for k in keypoints:
     y=int(k.pt[1])
     po=str(i)
     cv2.putText(im_with_keypoints,po,(x,y), font, 1, (200,0,0), 2, cv2.LINE_AA)
-   # labeled_array, num_features = label(im)
-   # print(num_array)
     i=i+1
 
 

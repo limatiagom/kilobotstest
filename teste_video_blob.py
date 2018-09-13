@@ -3,7 +3,7 @@ import numpy as np
 
 
 
-cap = cv2.VideoCapture("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/videoplayback.mp4")
+cap = cv2.VideoCapture("/Users/marinastavares/Google Drive/PETEEL/6. Pesquisas e Projetos/2018.2/1. Projetos Externos/TML + MST - Kilobotics/Materiais/Kilobots/kilobots_marina/videoplayback.mp4")
     # cv2.VideoCapture recebe como argumento o diretório do vídeo.
     # Se estiver, usando webcam, o argumento é um número (0 = câmera primária,
     # 1 = secundária etc
