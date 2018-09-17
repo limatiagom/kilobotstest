@@ -30,7 +30,7 @@ class KiloBlobs:
 def minDistance(x1,y1,x2,y2):
     distx = (x1 - x2) ** 2
     disty = (y1 - y2) ** 2
-    d = (distx + disty) ** 1/2
+    d = (distx + disty) ** 0.5
     return d
         
             
@@ -63,52 +63,52 @@ ListaBlob = []
 nBlobs= 0
 print(keypoints[0].pt[0])
 # cv2.imshow('image', im_with_keypoints)
-for k in keypoints:
-    
-    if (i >= 1):
-        # a condicao para a checagem é se, caso o numero de blobs achados for menos do que o numero de keypoints
-        while m < i & nBlobs<len(keypoints): 
-            print('m=%d and i=%d nBlob=%d com Blob' % (m,i,nBlobs))
-            # calcula a distancia do i fixo, e muda o m conforme a checagem
-            distCalculated = minDistance(keypoints[i].pt[0],keypoints[m].pt[0],keypoints[i].pt[1],keypoints[m].pt[1])
-            print(distCalculated)
 
-            if (distCalculated > globalDistance):
-                # Criar um novo blob caso a distancia for maior que a determinada
-                print('Entrou na condicao')
-                blobs=KiloBlobs(i,keypoints[i].pt[0],keypoints[i].pt[1],k.size)
-                cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
-                # desenha no blob com cor branca em qual blob foi criado
-                cv2.putText(im_with_keypoints,str(nBlobs),(int(blobs.x+20),int(blobs.y+20)), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
-                ListaBlob.append(blobs)
-                ListaBlob[i].printarInfos()
-                i = i + 1
-                # a cada blob achado, ele adiciona 1 para checar a condicao de while
-                nBlobs = nBlobs + 1
-            else: 
-                print('Entrou no else')
-                ListaBlob[m].atualizarXY(keypoints[i].pt[0],keypoints[i].pt[1])
-                # desenha no blob com cor preta a ordem que foi achado, e que foi adicionado
-                cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
-                cv2.putText(im_with_keypoints,str(nBlobs),(int(blobs.x+20),int(blobs.y+20)), font, 0.5, (0,0,0), 1, cv2.LINE_AA)
-                ListaBlob[m].printarInfos()
-                nBlobs = nBlobs + 1
+## estamos trabalhando os fors 
+for i in range(keypoints):
+    for m in range(i)
+        #calcular dist de m e i
+        #entrar nos ifs
+        if (i >= 1):
+            # a condicao para a checagem é se, caso o numero de blobs achados for menos do que o numero de keypoints
+            for m in range(i):
+                
+                print('m=%d and i=%d nBlob=%d com Blob' % (m,i,nBlobs))
+                # calcula a distancia do i fixo, e muda o m conforme a checagem
+                distCalculated = minDistance(keypoints[i].pt[0],keypoints[m].pt[0],keypoints[i].pt[1],keypoints[m].pt[1])
+                print('xi = %.1f, xm=%.1f , yi= %.1f,ym=%.1f dist=%f' % (keypoints[i].pt[0],keypoints[m].pt[0],keypoints[i].pt[1],keypoints[m].pt[1],distCalculated))
 
-            m = m + 1
-            
-            if (m==i & i < len(keypoints)):
-                m = 0
-
-
-    else:
-        blobs=KiloBlobs(i,k.pt[0],k.pt[1],k.size)
-        cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
-        ListaBlob.append(blobs)
-        ListaBlob[i].printarInfos()
-        i = i + 1
-        m = 0
-        nBlobs = nBlobs + 1
-    
+                if (distCalculated > globalDistance):
+                    # Criar um novo blob caso a distancia for maior que a determinada
+                    print('Entrou na condicao')
+                    blobs=KiloBlobs(i,keypoints[i].pt[0],keypoints[i].pt[1],k.size)
+                    cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
+                    # desenha no blob com cor branca em qual blob foi criado
+                    cv2.putText(im_with_keypoints,str(nBlobs),(int(blobs.x+20),int(blobs.y+20)), font, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                    ListaBlob.append(blobs)
+                    ListaBlob[i].printarInfos()
+                    i = i + 1
+                    # a cada blob achado, ele adiciona 1 para checar a condicao de while
+                    nBlobs = nBlobs + 1
+                    
+                else: 
+                    print('Entrou no else')
+                    ListaBlob[m].atualizarXY(keypoints[i].pt[0],keypoints[i].pt[1])
+                    # desenha no blob com cor preta a ordem que foi achado, e que foi adicionado
+                    cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
+                    cv2.putText(im_with_keypoints,str(nBlobs),(int(blobs.x+20),int(blobs.y+20)), font, 0.5, (0,0,0), 1, cv2.LINE_AA)
+                    ListaBlob[m].printarInfos()
+                    nBlobs = nBlobs + 1
+                    
+                
+        else:
+            blobs=KiloBlobs(i,k.pt[0],k.pt[1],k.size)
+            cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
+            ListaBlob.append(blobs)
+            ListaBlob[i].printarInfos()
+            i = i + 1
+            nBlobs = nBlobs + 1
+        
 #x, y, _ = ListaBlob
 #print(x,y)
 
