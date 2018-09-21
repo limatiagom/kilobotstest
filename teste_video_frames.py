@@ -37,7 +37,7 @@ while True:
 
 ####### SETANDO PARAMETROS E ENCONTRANDO BLOBS
     params = cv2.SimpleBlobDetector_Params()
-         
+        
     # Change thresholds
     params.minThreshold = 1
     params.maxThreshold = 500
