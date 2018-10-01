@@ -5,7 +5,7 @@ import cv2
 numberFrame = -1
 
 # Função para pegar video
-cap = cv2.VideoCapture("video5.mp4")
+cap = cv2.VideoCapture(0)
 
 # Fonte utilizada no vídeo
 font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
@@ -66,14 +66,15 @@ params = cv2.SimpleBlobDetector_Params()
     
 # Filter by Area.
 params.filterByArea = True
-params.minArea = 100
+params.minArea = 1000
+# params.maxArea = 300
 
 params.filterByInertia = True
-params.minInertiaRatio = 0.0000001
+params.minInertiaRatio = 0.0001
     
 # Filter by Convexity
 params.filterByConvexity = True
-params.minConvexity = .00001
+params.minConvexity = .0000001
 
 # Enquanto o vídeo tem frame
 while True:
@@ -81,7 +82,7 @@ while True:
     # Parametros para captar vídeo pelo OpenCV
     ret, frame = cap.read()
     numberFrame = numberFrame + 1
-    frame = cv2.resize(frame, (200,200))
+    frame = cv2.resize(frame, (400,400))
 
     # criar um detector de acordo com os parametros estabelecidos
     detector = cv2.SimpleBlobDetector_create(params)
@@ -159,7 +160,7 @@ while True:
             blob = KiloBlobs(numberID,perdido.x,perdido.y,perdido.size)
             blobList.append(blob)
             
-            cv2.putText(im_with_keypoints,str(blob.ID),(int(blob.x),int(blob.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
+            cv2.putText(im_with_keypoints,str(blob.ID),(int(blob.x),int(blob.y)), font, 1, (0,0,0), 2, cv2.LINE_AA)
             
             numberID += 1
     

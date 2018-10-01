@@ -1,8 +1,9 @@
 import numpy as np
 import cv2
+import pyzbar.pyzbar as pyzbar
 globalDistance = 130
 
-im = cv2.imread('kilo3.jpg', 1)
+im = cv2.imread('frame.png', 1)
 
 img = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 
@@ -34,7 +35,16 @@ def minDistance(x1,y1,x2,y2):
     d = (distx + disty) ** 0.5
     return d
         
-            
+def decode(im) : 
+  # Find barcodes and QR codes
+  decodedObjects = pyzbar.decode(im)
+ 
+  # Print results
+  for obj in decodedObjects:
+    print('Type : ', obj.type)
+    print('Data : ', obj.data,'\n')
+     
+  return decodedObjects            
 
 params = cv2.SimpleBlobDetector_Params()
      
@@ -67,23 +77,19 @@ for i in range(len(keypoints)): #vai de 0 até (quantidade de keypoints)-1
                 blobs = KiloBlobs(i,keypoints[i].pt[0],keypoints[i].pt[1],keypoints[i].size)
                 cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
                 ListaBlob.append(blobs)
-                print('Primeiro Blob criado')
-                ListaBlob[i].printarInfos()
+                
+                # ListaBlob[i].printarInfos()
         else:
                 for m in (range(i)): #isso quer dizer que vai de 0 até (quantidade de i)-1
                         dist = minDistance(keypoints[i].pt[0],keypoints[m].pt[0],keypoints[i].pt[1],keypoints[m].pt[1])
-                        print ('m =')
-                        print(m)
-                        print ('i=')
-                        print (i)
                         
                         if (dist < globalDistance):
                               
                                 copia = KiloBlobs(i,keypoints[m].pt[0],keypoints[m].pt[1],keypoints[m].size)
                                 #cv2.putText(im_with_keypoints,str(copia.ID),(int(copia.x),int(copia.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
                                 ListaBlob.append(copia)
-                                print('Blob criado com mesmo ID de outro')
-                                ListaBlob[m].printarInfos()
+                                # print('Blob criado com mesmo ID de outro')
+                                # ListaBlob[m].printarInfos()
                                 
                                 #print('Atualizou blob')
                                 #ListaBlob[m].atualizarXY(keypoints[i].pt[0],keypoints[i].pt[1])
@@ -91,10 +97,13 @@ for i in range(len(keypoints)): #vai de 0 até (quantidade de keypoints)-1
                                 # desenha no blob com cor preta a ordem que foi achado, e que foi adicionado
                                 #cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
                         else:
-                                print('Criou novo blob')
+                                
+                                # print('Criou novo blob')
                                 blobs = KiloBlobs(i,keypoints[i].pt[0],keypoints[i].pt[1],keypoints[i].size)
                                 cv2.putText(im_with_keypoints,str(blobs.ID),(int(blobs.x),int(blobs.y)), font, 1, (200,0,0), 2, cv2.LINE_AA)
 
+decode(im)
 cv2.imshow("Blob",im_with_keypoints)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
