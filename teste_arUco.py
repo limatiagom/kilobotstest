@@ -15,7 +15,7 @@ while(True):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     res = cv2.aruco.detectMarkers(gray,dictionary)
-#   print(res[0],res[1],len(res[2]))
+    print(res[0], res[1])
 
     if len(res[0]) > 0:
         cv2.aruco.drawDetectedMarkers(gray,res[0],res[1])
